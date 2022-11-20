@@ -1,4 +1,4 @@
-package ru.kpfu.itis.shkalin.controller;
+package ru.kpfu.itis.shkalin.servlet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
