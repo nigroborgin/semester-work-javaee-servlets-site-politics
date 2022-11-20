@@ -1,6 +1,6 @@
-package ru.kpfu.itis.shkalin.controller;
+package ru.kpfu.itis.shkalin.servlet;
 
-import ru.kpfu.itis.shkalin.dto.UserDto;
+import ru.kpfu.itis.shkalin.dto.AbstractDto;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

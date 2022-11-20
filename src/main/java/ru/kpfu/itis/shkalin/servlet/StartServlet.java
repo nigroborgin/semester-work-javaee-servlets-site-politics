@@ -1,4 +1,4 @@
-package ru.kpfu.itis.shkalin.controller;
+package ru.kpfu.itis.shkalin.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
