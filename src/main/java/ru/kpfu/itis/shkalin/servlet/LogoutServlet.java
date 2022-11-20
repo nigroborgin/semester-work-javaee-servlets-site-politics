@@ -1,4 +1,4 @@
-package ru.kpfu.itis.shkalin.controller;
+package ru.kpfu.itis.shkalin.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie c: cookies) {
@@ -28,6 +28,7 @@ public class LogoutServlet extends HttpServlet {
             httpSession.invalidate();
         }
 
-        req.getRequestDispatcher("/view/main.ftl").forward(req, resp);
+//        req.getRequestDispatcher("/view/main.ftl");
+        resp.sendRedirect("/politics/main");
     }
 }
