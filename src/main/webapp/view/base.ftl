@@ -14,7 +14,7 @@
     </div>
 
     <#if username??>
-        <h3>USER IS: ${username}</h3>
+        <h3>USER: ${username}</h3>
         <a href="/politics/logout">Logout</a>
     <#else>
         <a href="/politics/login">Login</a>

@@ -8,7 +8,8 @@
     <br>
     <br>
     <#list users as u>
-        ${u.username} ${u.email}
+        username: ${u.username}
+        email: ${u.email}
         <br>
     </#list>
 </#macro>
