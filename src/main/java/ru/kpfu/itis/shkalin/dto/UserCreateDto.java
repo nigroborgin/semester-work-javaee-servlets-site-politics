@@ -6,7 +6,8 @@ public class UserCreateDto extends AbstractDto {
     private String email;
     private String pictureURL;
 
-    public UserCreateDto() {}
+    public UserCreateDto() {
+    }
 
     public UserCreateDto(String username, String password, String email, String pictureURL) {
         this.username = username;
