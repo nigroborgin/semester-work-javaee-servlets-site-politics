@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "userServlet", urlPatterns = {"/users"})
-public class UserServlet extends HttpServlet {
-
+@WebServlet(name = "exceptionServlet", urlPatterns = {"/exception"})
+public class ExceptionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/view/users.ftl").forward(req, resp);
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad request!");
     }
 }
