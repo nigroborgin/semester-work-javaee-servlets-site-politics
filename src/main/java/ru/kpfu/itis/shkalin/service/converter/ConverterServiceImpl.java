@@ -1,4 +1,4 @@
-package ru.kpfu.itis.shkalin.service;
+package ru.kpfu.itis.shkalin.service.converter;
 
 import ru.kpfu.itis.shkalin.dto.AbstractDto;
 import ru.kpfu.itis.shkalin.entity.AbstractEntity;
@@ -9,21 +9,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface EntityDtoConverterService {
+public class ConverterServiceImpl implements ConverterService {
 
-    AbstractEntity convert(AbstractDto dto);
-
-    AbstractDto convert(AbstractEntity entity);
-
-    default void updateDto(AbstractEntity entity, AbstractDto dto) {
+    @Override
+    public AbstractDto getUpdateDto(AbstractEntity entity, AbstractDto dto) {
         update(entity, dto);
+        return dto;
     }
 
-    default void updateEntity(AbstractEntity entity, AbstractDto dto) {
+    @Override
+    public AbstractEntity getUpdateEntity(AbstractEntity entity, AbstractDto dto) {
         update(dto, entity);
+        return entity;
     }
 
-    private void update(Object updater, Object updatable) {
+    @Override
+    public void update(Object updater, Object updatable) {
 
         Method[] updaterMethods = updater.getClass().getDeclaredMethods();
         Method[] updatableMethods = updatable.getClass().getDeclaredMethods();
@@ -47,19 +48,15 @@ public interface EntityDtoConverterService {
                 gettersNameWithoutPrefix = getter.getName().substring(3);
 
                 if (settersNameWithoutPrefix.equals(gettersNameWithoutPrefix)) {
-
                     // TODO: add logging
                     try {
                         getterResult = getter.invoke(updater);
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        // не должно происходить)
                         e.printStackTrace();
                     }
-
                     try {
                         setter.invoke(updatable, getterResult);
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        // не должно происходить)
                         e.printStackTrace();
                     }
 
