@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/handle")
+@WebServlet("/handle/")
 public class ExceptionHandler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,10 +26,9 @@ public class ExceptionHandler extends HttpServlet {
 
         req.setAttribute("statusCode", code);
         req.setAttribute("uri", uri == null ? "" : uri);
-        if (code == 500) {
+        if (code != null) {
             req.setAttribute("message", throwable.getMessage());
         }
-
-        req.getRequestDispatcher("politics/view/exception.ftl").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/exception.ftl").forward(req, resp);
     }
 }
