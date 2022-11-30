@@ -1,8 +1,7 @@
-package ru.kpfu.itis.shkalin.service.сrud;
+package ru.kpfu.itis.shkalin.service.crud;
 
 import ru.kpfu.itis.shkalin.dao.BookDao;
 import ru.kpfu.itis.shkalin.dao.Dao;
-import ru.kpfu.itis.shkalin.dto.AbstractDto;
 import ru.kpfu.itis.shkalin.dto.BookFullDto;
 import ru.kpfu.itis.shkalin.entity.Book;
 import ru.kpfu.itis.shkalin.service.converter.ConverterService;
