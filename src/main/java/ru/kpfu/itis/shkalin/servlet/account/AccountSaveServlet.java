@@ -1,6 +1,5 @@
 package ru.kpfu.itis.shkalin.servlet.account;
 
-import ru.kpfu.itis.shkalin.dto.AccountAdminEditDto;
 import ru.kpfu.itis.shkalin.dto.AccountFullDto;
 import ru.kpfu.itis.shkalin.entity.Role;
 import ru.kpfu.itis.shkalin.service.crud.AccountCrudService;

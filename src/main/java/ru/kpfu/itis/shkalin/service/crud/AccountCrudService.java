@@ -2,8 +2,6 @@ package ru.kpfu.itis.shkalin.service.crud;
 
 import ru.kpfu.itis.shkalin.dao.Dao;
 import ru.kpfu.itis.shkalin.dao.AccountDao;
-import ru.kpfu.itis.shkalin.dto.AbstractDto;
-import ru.kpfu.itis.shkalin.dto.AccountAdminEditDto;
 import ru.kpfu.itis.shkalin.dto.AccountFullDto;
 import ru.kpfu.itis.shkalin.entity.Account;
 import ru.kpfu.itis.shkalin.service.converter.ConverterService;
