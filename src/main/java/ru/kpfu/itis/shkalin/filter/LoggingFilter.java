@@ -32,7 +32,7 @@ public class LoggingFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         Map<String, String[]> params = request.getParameterMap();
-        
+
         if (params != null) {
             String paramString = params.keySet().stream()
                     .map(key -> key + "=" + Arrays.toString(params.get(key)))
