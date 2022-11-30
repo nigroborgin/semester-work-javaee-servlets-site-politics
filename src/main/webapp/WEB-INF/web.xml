@@ -26,12 +26,27 @@
     </servlet-mapping>
 
     <error-page>
-        <location>/handle</location>
+        <location>/handle/</location>
+    </error-page>
+
+    <error-page>
+        <error-code>401</error-code>
+        <location>/WEB-INF/view/401.ftl</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/view/403.ftl</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/view/404.html</location>
+        <location>/WEB-INF/view/404.ftl</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/view/500.ftl</location>
     </error-page>
 
 </web-app>
