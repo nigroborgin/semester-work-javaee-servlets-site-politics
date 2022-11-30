@@ -2,14 +2,21 @@
 <#macro title>Login</#macro>
 
 <#macro content>
-    <h3>Login page!</h3>
-    <form action="login" method="post">
+    <h2>Login</h2><br>
+    <form action="/politics/login/" method="post">
         <#if message??><strong>${message}</strong><br></#if>
-        Login:
-        <input type="text" name="login"/>
+        <label>Username:
+            <input type="text" placeholder="Enter your username" name="username"/>
+        </label>
         <br>
-        Password:
-        <input type="password" name="password"/>
+        <label>Password:
+            <input type="password" placeholder="Enter your password" name="password"/>
+        </label>
+        <br>
+
+        <label>Save user
+            <input type="checkbox" name="saveuser"/>
+        </label>
         <br>
         <input type="submit" value="Login">
     </form>
