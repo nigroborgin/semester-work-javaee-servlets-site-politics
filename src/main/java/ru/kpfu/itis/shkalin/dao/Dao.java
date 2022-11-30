@@ -11,7 +11,9 @@ public interface Dao<T extends AbstractEntity> {
 
     // READ
     T get(int id);
+
     T get(String name);
+
     List<T> getAll();
 
     // UPDATE
