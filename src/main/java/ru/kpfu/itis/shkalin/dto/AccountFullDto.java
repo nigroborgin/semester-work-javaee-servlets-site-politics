@@ -2,7 +2,7 @@ package ru.kpfu.itis.shkalin.dto;
 
 import ru.kpfu.itis.shkalin.entity.Role;
 
-public class UserFullDto extends AbstractDto {
+public class AccountFullDto extends AbstractDto {
     private Integer id;
     private String username;
     private String password;
@@ -10,10 +10,10 @@ public class UserFullDto extends AbstractDto {
     private Role role;
     private String pictureURL;
 
-    public UserFullDto() {
+    public AccountFullDto() {
     }
 
-    public UserFullDto(Integer id, String username, String password, String email, Role role, String pictureURL) {
+    public AccountFullDto(Integer id, String username, String password, String email, Role role, String pictureURL) {
         this.id = id;
         this.username = username;
         this.password = password;

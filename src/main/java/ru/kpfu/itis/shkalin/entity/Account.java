@@ -2,19 +2,19 @@ package ru.kpfu.itis.shkalin.entity;
 
 import java.util.Objects;
 
-public class User extends AbstractEntity {
+public class Account extends AbstractEntity {
     private Integer id;
+    private Role role;
     private String username;
     private String password;
     private String email;
-    private Role role;
     private String pictureURL;
     // TODO: Posts ???
 
-    public User() {
+    public Account() {
     }
 
-    public User(Integer id, String username, String password, String email, Role role, String pictureURL) {
+    public Account(Integer id, String username, String password, String email, Role role, String pictureURL) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -74,14 +74,14 @@ public class User extends AbstractEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(role, user.role) && Objects.equals(pictureURL, user.pictureURL);
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return Objects.equals(id, account.id) && Objects.equals(username, account.username) && Objects.equals(password, account.password) && Objects.equals(email, account.email) && Objects.equals(role, account.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, role, pictureURL);
+        return Objects.hash(id, username, password, email, role);
     }
 
     @Override
@@ -92,7 +92,6 @@ public class User extends AbstractEntity {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", pictureURL='" + pictureURL + '\'' +
                 '}';
     }
 }
