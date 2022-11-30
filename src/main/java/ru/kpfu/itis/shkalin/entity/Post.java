@@ -1,5 +1,6 @@
 package ru.kpfu.itis.shkalin.entity;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Post extends AbstractEntity {
@@ -8,12 +9,12 @@ public class Post extends AbstractEntity {
     private String viewAuthor;
     private String title;
     private String text;
-    private String date;
-    private String type; // TODO: DB date  -->  ????
+    private LocalDateTime date;
+    private String type;
 
     public Post() {}
 
-    public Post(Integer id, Integer userId, String viewAuthor, String title, String text, String date, String type) {
+    public Post(Integer id, Integer userId, String viewAuthor, String title, String text, LocalDateTime date, String type) {
         this.id = id;
         this.userId = userId;
         this.viewAuthor = viewAuthor;
@@ -63,11 +64,11 @@ public class Post extends AbstractEntity {
         this.text = text;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

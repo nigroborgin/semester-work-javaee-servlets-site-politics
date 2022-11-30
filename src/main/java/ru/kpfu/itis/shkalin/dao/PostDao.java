@@ -1,71 +1,82 @@
 package ru.kpfu.itis.shkalin.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.kpfu.itis.shkalin.entity.Post;
 
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostDao implements Dao<Post> {
 
-    Integer id = 4;
-    List<Post> postList = new ArrayList<>(List.of(new Post[]{
-            new Post(
-                    1,
-                    1,
-                    "RTF",
-                    "Политический кризис в Шри-Ланке: основные причины",
-                    "Основные причины кризиса\n" +
-                            "Начиная с 1977 года во внутренней политике Шри-Ланки установился курс на неолиберализм. Это привело к снижению регулирующей роли государства в экономике, приватизации и урезания общественных фондов. Одновременно коррупция и кумовство крепко укоренились в политике, она превратилась в бизнес. Прибыльный характер этого бизнеса породил политические кланы Шри-Ланки.\n" +
-                            "\n" +
-                            "\n" +
-                            "МВФ и Всемирный банк через займы сделали экономику Шри-Ланки подконтрольной своей воле. Долговой кризис обострился в том числе потому, что полученные средства не смогли эффективно инвестировать в экономику страны. Чтобы оплатить старые долги, правительство брало все новые и новые займы. В последние месяцы уже прошлый министр финансов и глава Центробанка Басил Раджапакса, который также приходится братом президента и вице-президента страны, принял решение запустить денежный печатный станок. Это еще больше усугубило обстановку.",
-                    "22.11.2022",
-                    "article"),
-            new Post(
-                    2,
-                    1,
-                    "RTF",
-                    "Ад и Израиль",
-                    "Самая большая открытая тюрьма в мире — вот что такое далекая от нас Газа. Но, видимо, когда-то советское телевидение чуть переборщило с “Международной панорамой”. Итог — в конце 80х многим казалось, будто всех этих мест либо не существует вовсе, либо они не имеют никакого отношения к нам. Лучше давайте про магазинные полки, шмотки и дефицит. А потом — бац и похожие на Газу резервации начали возникать под боком. Оказалось — оккупированные территории, национальная рознь, дискриминация по национальному признаку мало зависят от географии.",
-                    "12.06.2021",
-                    "article"),
-            new Post(
-                    3,
-                    2,
-                    "dialectic",
-                    "Военное положение. Самое важное",
-                    "Военное положение — это юридический режим, при котором власти получают возможность ограничить права россиян. Например, свободу передвижения и свободу выражения мнения. Военное положение могут ввести, как на всей территории страны, так и в отдельных регионах. Решение о переходе на военное положение может ввести президент при агрессии или «непосредственной угрозе агрессии» против территории России." +
-                            "Что будет после ввода военного положения?\n" +
-                            "Как только Путин подпишет указ о вводе военного положения он будет немедленно опубликован и передан на утверждение в Совет Федерации РФ — на это у него есть 48 часов с момента передачи указа.\n" +
-                            "\n" +
-                            "В законе предусмотрен список ограничений для граждан и организаций, которые могут выбрать власти. Полный список мер указан в 7 статье закона о военном положении, мы приводим наиболее вероятные из них.",
-                    "30.09.2022",
-                    "post"),
-            new Post(
-                    4,
-                    3,
-                    "rabkor",
-                    "ssssssssssssss",
-                    "лпрфжапрф плджр пфрпожрфываопфрапф опфрджопролфапрфпролдфапрываодпрваоып. Полный список мер указан в 7 статье закона о военном положении, мы приводим наиболее вероятные из них.",
-                    "20.09.2020",
-                    "post")}));
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostDao.class);
+    private final Connection connection;
+
+    public PostDao(Connection connection) {
+        this.connection = connection;
+    }
 
     @Override
     public void create(Post post) {
-        id++;
-        post.setId(id);
-        System.out.println(post);
-        postList.add(post);
+
+        Integer userId = post.getUserId();
+        String viewAuthor = post.getViewAuthor();
+        String title = post.getTitle();
+        String text = post.getText();
+        LocalDateTime date = post.getDate();
+        String type = post.getType();
+
+        String sql = null;
+
+        try {
+            sql = "INSERT INTO post (user_id, title, date, author, text, type) VALUES (?, ?, ?, ?, ?, ?); " +
+                    "COMMIT;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, title);
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(date));
+            preparedStatement.setString(4, viewAuthor);
+            preparedStatement.setString(5, text);
+            preparedStatement.setString(6, type);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.warn("Failed execute insert query", e);
+            LOGGER.warn("SQL: " + sql);
+        }
     }
 
     @Override
     public Post get(int id) {
-        for (Post post : postList) {
-            if (post.getId().equals(id)) {
-                return post;
+        String sql = null;
+        try {
+            Statement statement = connection.createStatement();
+            sql = "SELECT * " +
+                    "FROM post as p " +
+                    "WHERE p.id = " + id;
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                return new Post(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("author"),
+                        resultSet.getString("title"),
+                        resultSet.getString("text"),
+                        resultSet.getTimestamp("date").toLocalDateTime(),
+                        resultSet.getString("type")
+                );
+            } else {
+                return null;
             }
+        } catch (SQLException e) {
+            LOGGER.warn("Failed execute get query", e);
+            LOGGER.warn("SQL: " + sql);
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -75,16 +86,89 @@ public class PostDao implements Dao<Post> {
 
     @Override
     public List<Post> getAll() {
-        return postList;
+        String sql = null;
+        try {
+            Statement statement = connection.createStatement();
+            sql = "SELECT * FROM post";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            List<Post> posts = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Post post = new Post(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("author"),
+                        resultSet.getString("title"),
+                        resultSet.getString("text"),
+                        resultSet.getTimestamp("date").toLocalDateTime(),
+                        resultSet.getString("type")
+                );
+                posts.add(post);
+            }
+
+            return posts;
+        } catch (SQLException e) {
+            LOGGER.warn("Failed execute get query", e);
+            LOGGER.warn("SQL: " + sql);
+            return List.of();
+        }
     }
 
     @Override
     public void update(Post post) {
 
+        Integer id = post.getId();
+        String viewAuthor = post.getViewAuthor();
+        String title = post.getTitle();
+        String text = post.getText();
+        LocalDateTime date = post.getDate();
+        String sql = null;
+        PreparedStatement preparedStatement;
+
+        try {
+            int counter = 0;
+            if (date == null || viewAuthor == null) {
+                sql = "UPDATE post " +
+                        "SET (title, text) = (?, ?) " +
+                        "WHERE id = ?;";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(++counter, title);
+                preparedStatement.setString(++counter, text);
+            } else {
+                sql = "UPDATE post " +
+                        "SET (date, author, title, text) = (?, ?, ?, ?) " +
+                        "WHERE id = ?;";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setTimestamp(++counter, Timestamp.valueOf(date));
+                preparedStatement.setString(++counter, viewAuthor);
+                preparedStatement.setString(++counter, title);
+                preparedStatement.setString(++counter, text);
+            }
+            preparedStatement.setInt(++counter, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.warn("Failed execute update query", e);
+            LOGGER.warn("SQL: " + sql);
+        }
     }
 
     @Override
     public void delete(int id) {
+        String sql = null;
 
+        try {
+            sql = "DELETE FROM post " +
+                    "WHERE id = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.warn("Failed execute delete query", e);
+            LOGGER.warn("SQL: " + sql);
+        }
     }
 }

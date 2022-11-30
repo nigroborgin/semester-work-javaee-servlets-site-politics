@@ -1,18 +1,20 @@
 package ru.kpfu.itis.shkalin.dto;
 
+import java.time.LocalDateTime;
+
 public class PostFullDto extends AbstractDto {
     private Integer id;
     private Integer userId;
     private String viewAuthor;
     private String title;
     private String text;
-    private String date;
-    private String type;// TODO: DB date  -->  ????
+    private LocalDateTime date;
+    private String type;
 
     public PostFullDto() {
     }
 
-    public PostFullDto(Integer id, Integer userId, String viewAuthor, String title, String text, String date, String type) {
+    public PostFullDto(Integer id, Integer userId, String viewAuthor, String title, String text, LocalDateTime date, String type) {
         this.id = id;
         this.userId = userId;
         this.viewAuthor = viewAuthor;
@@ -62,11 +64,11 @@ public class PostFullDto extends AbstractDto {
         this.text = text;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
