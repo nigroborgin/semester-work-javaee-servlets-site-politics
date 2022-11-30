@@ -1,6 +1,5 @@
-package ru.kpfu.itis.shkalin.service.сrud;
+package ru.kpfu.itis.shkalin.service.crud;
 
-import ru.kpfu.itis.shkalin.dao.BookDao;
 import ru.kpfu.itis.shkalin.dao.CommentDao;
 import ru.kpfu.itis.shkalin.dao.Dao;
 import ru.kpfu.itis.shkalin.dto.CommentFullDto;

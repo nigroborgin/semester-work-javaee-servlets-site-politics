@@ -1,4 +1,4 @@
-package ru.kpfu.itis.shkalin.service.сrud;
+package ru.kpfu.itis.shkalin.service.crud;
 
 import ru.kpfu.itis.shkalin.dto.AbstractDto;
 
