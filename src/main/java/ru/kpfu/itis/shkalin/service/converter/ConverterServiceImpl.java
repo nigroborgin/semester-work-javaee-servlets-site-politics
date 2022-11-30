@@ -48,18 +48,18 @@ public class ConverterServiceImpl implements ConverterService {
                 gettersNameWithoutPrefix = getter.getName().substring(3);
 
                 if (settersNameWithoutPrefix.equals(gettersNameWithoutPrefix)) {
-                    // TODO: add logging
-                    try {
-                        getterResult = getter.invoke(updater);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
+                    if (getter.getReturnType().getName().equals(setter.getParameterTypes()[0].getName())) {
+                        try {
+                            getterResult = getter.invoke(updater);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            setter.invoke(updatable, getterResult);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    try {
-                        setter.invoke(updatable, getterResult);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
-
                     break;
                 }
             }
