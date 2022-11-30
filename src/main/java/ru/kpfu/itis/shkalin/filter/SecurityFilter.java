@@ -1,7 +1,5 @@
 package ru.kpfu.itis.shkalin.filter;
 
-import ru.kpfu.itis.shkalin.exception.NoRigntsException;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
