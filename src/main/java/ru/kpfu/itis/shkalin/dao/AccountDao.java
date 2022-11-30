@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.kpfu.itis.shkalin.entity.Account;
 import ru.kpfu.itis.shkalin.entity.Role;
-mimport ru.kpfu.itis.shkalin.entity.Account;
 
 import java.sql.*;
 import java.util.ArrayList;
