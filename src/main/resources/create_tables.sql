@@ -17,6 +17,9 @@ create table if not exists role_of_user
         primary key (id)
 );
 
+INSERT INTO role_of_user (id, name) VALUES (1, 'admin');
+INSERT INTO role_of_user (id, name) VALUES (2, 'user');
+
 create table if not exists account
 (
     id serial,
