@@ -2,27 +2,27 @@
 <#macro title>Registration</#macro>
 
 <#macro content>
-    <h2>Registration</h2><br>
+    <h2>Registration</h2>
     <form action="/politics/reg/" method="post">
         <#if message??><strong>${message}</strong><br></#if>
 
         <label>Username:
-            <input type="text" name="username"/>
+            <br><input type="text" name="username"/>
         </label>
         <br>
 
         <label>Email:
-            <input type="text" name="email"/>
+            <br><input type="text" name="email"/>
         </label>
         <br>
 
         <label>Password:
-            <input type="password" name="password1"/>
+            <br><input type="password" name="password1"/>
         </label>
         <br>
 
         <label>Password:
-            <input type="password" name="password2"/>
+            <br><input type="password" name="password2"/>
         </label>
         <br>
         <input type="submit" value="Register">

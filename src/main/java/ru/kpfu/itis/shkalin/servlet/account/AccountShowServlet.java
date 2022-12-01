@@ -33,7 +33,7 @@ public class AccountShowServlet extends HttpServlet {
         } else {
             id = req.getParameter("id");
             if (id != null) {
-                 user = accountCrudService.get(Integer.parseInt(id));
+                user = accountCrudService.get(Integer.parseInt(id));
                 if (user != null) {
                     req.setAttribute("user", user);
                 } else {

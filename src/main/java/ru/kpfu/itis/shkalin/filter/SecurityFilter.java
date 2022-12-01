@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "securityFilter",
+@WebFilter(filterName = "filter30Security",
         urlPatterns = {"/users/delete/",
                 "/books/add/", "/books/edit/", "/books/delete/",
                 "/articles/add/", "/articles/edit/", "/articles/delete/"})

@@ -2,7 +2,7 @@
 <#macro title>Books</#macro>
 
 <#macro content>
-    <h2>Books</h2><br>
+    <h2>Books</h2>
     <#if message??>
         <strong>${message}</strong>
         <br>
@@ -24,11 +24,16 @@
                 <th>Download</th>
             </tr>
             <#list bookList as book>
-
                 <tr>
-                    <td><center>${book?counter}</center></td>
-                    <td><#if book.title??> ${book.title}</#if></td>
-                    <td><#if book.author??>${book.author}</#if></td>
+                    <td>
+                        <center>${book?counter}</center>
+                    </td>
+                    <td>
+                        <center><#if book.title??> ${book.title}</#if></center>
+                    </td>
+                    <td>
+                        <center><#if book.author??>${book.author}</#if></center>
+                    </td>
                     <th>
                         <center>
                             <button onclick="location.href='/politics/books/?id=${book.id}'">more</button>
@@ -48,11 +53,14 @@
                             </center>
                         </td>
                     </#if>
-                    <th><a href="${book.fileURL}" download="">
-                            <button>
+                    <th>
+                        <center>
+                            <a href="${book.fileURL}" download="">
+                                <button>
                                     <img width="24" src="/politics/picture/download-file.png">
-                            </button>
-                        </a>
+                                </button>
+                            </a>
+                        </center>
                     </th>
                 </tr>
             </#list>
@@ -60,17 +68,15 @@
     <#elseif book??>
         <h2>${book.title}</h2>
         ${book.author}<br>
-        <#if role??>
-            <#if (role == 'admin')>
-                <button onclick="location.href='/politics/books/edit/?id=${book.id}'">edit</button>
-                <form method="post" action="/politics/books/delete/?id=${book.id}">
-                    <button type="submit">delete</button>
-                </form>
-            </#if>
-        </#if>
+        <#if role??><#if (role == 'admin')>
+            <button onclick="location.href='/politics/books/edit/?id=${book.id}'">edit</button>
+            <form method="post" action="/politics/books/delete/?id=${book.id}">
+                <button type="submit">delete</button>
+            </form>
+        </#if></#if>
         <h3>description:</h3>
         ${book.description}
-        <br>
+        <br><br>
         <a href="${book.fileURL}">OPEN</a>
         <br><br>
         <a href="${book.fileURL}" download="">DOWNLOAD</a>

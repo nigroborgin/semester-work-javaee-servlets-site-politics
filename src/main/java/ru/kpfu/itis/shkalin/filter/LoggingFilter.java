@@ -1,7 +1,5 @@
 package ru.kpfu.itis.shkalin.filter;
 
-import freemarker.ext.servlet.ServletContextHashModel;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,7 +14,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebFilter(filterName = "loggingFilter", urlPatterns = "/*")
+@WebFilter(filterName = "filter40Logging", urlPatterns = "/*")
 public class LoggingFilter implements Filter {
 
     private ServletContext context;

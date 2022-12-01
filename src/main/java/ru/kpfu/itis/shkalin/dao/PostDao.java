@@ -79,6 +79,37 @@ public class PostDao implements Dao<Post> {
         }
     }
 
+    public List<Post> getByUserId(int id) {
+        String sql = null;
+        try {
+            Statement statement = connection.createStatement();
+            sql = "SELECT * " +
+                    "FROM post as p " +
+                    "WHERE p.user_id = " + id;
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            List<Post> posts = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Post post = new Post(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("author"),
+                        resultSet.getString("title"),
+                        resultSet.getString("text"),
+                        resultSet.getTimestamp("date").toLocalDateTime(),
+                        resultSet.getString("type")
+                );
+                posts.add(post);
+            }
+            return posts;
+        } catch (SQLException e) {
+            LOGGER.warn("SQL: " + sql);
+            LOGGER.warn("Failed execute get query", e);
+            return List.of();
+        }
+    }
+
     @Override
     public Post get(String name) {
         return null;
@@ -109,8 +140,8 @@ public class PostDao implements Dao<Post> {
 
             return posts;
         } catch (SQLException e) {
-            LOGGER.warn("Failed execute get query", e);
             LOGGER.warn("SQL: " + sql);
+            LOGGER.warn("Failed execute get query", e);
             return List.of();
         }
     }

@@ -7,9 +7,10 @@
             <th>ID</th>
             <th>Picture</th>
             <th>Username</th>
-            <th>Email</th>
             <th>Role</th>
+            <th>Posts</th>
             <#if role??><#if role=='admin'>
+                <th>Email</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </#if></#if>
@@ -17,25 +18,40 @@
         <#if userList??>
             <#list userList as user>
                 <tr>
-                    <td>${user.id}</td>
+                    <td>
+                        <center>${user.id}</center>
+                    </td>
                     <td>
                         <center>
-                            <img width="35"
-                                 <#if user.pictureURL??>src="${user.pictureURL}"</#if>
-                                 alt="/politics/picture/default.bmp" />
+                            <img height="40" <#if user.pictureURL??>src="${user.pictureURL}"</#if>
+                                 alt="/politics/picture/default.bmp"/>
                         </center>
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.email}</td>
-                    <td>${user.getRole().getName()}</td>
+                    <td>
+                        <center>${user.username}</center>
+                    </td>
+                    <td>
+                        <center>${user.getRole().getName()}</center>
+                    </td>
+                    <td>
+                        <center><a href="/politics/posts/fromuser/?iduser=${user.id}">show posts</a></center>
+                    </td>
+
                     <#if role??><#if role=='admin'>
                         <td>
-                            <button onclick="location.href='/politics/users/edit/?id=${user.id}'">edit</button>
+                            <center>${user.email}</center>
                         </td>
                         <td>
-                            <form method="post" action="/politics/users/delete/?id=${user.id}">
-                                <button type="submit">delete</button>
-                            </form>
+                            <center>
+                                <button onclick="location.href='/politics/users/edit/?id=${user.id}'">edit</button>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <form method="post" action="/politics/users/delete/?id=${user.id}">
+                                    <button type="submit">delete</button>
+                                </form>
+                            </center>
                         </td>
                     </#if></#if>
                 </tr>

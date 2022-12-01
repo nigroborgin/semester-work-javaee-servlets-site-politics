@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "authenticationFilter",
+@WebFilter(filterName = "AuthenticationFilter",
         urlPatterns = {"/users/edit/", "/users/delete/",
                 "/books/add/", "/books/edit/", "/books/delete/",
                 "/articles/add/", "/articles/edit/", "/articles/delete/",
-                "/posts/add/", "/posts/edit/", "/posts/delete/"})
+                "/posts/add/", "/posts/edit/", "/posts/delete/", "/posts/my/"})
 public class AuthenticationFilter implements Filter {
 
     @Override

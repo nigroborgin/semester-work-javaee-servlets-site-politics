@@ -1,6 +1,7 @@
 package ru.kpfu.itis.shkalin.service.crud;
 
 import ru.kpfu.itis.shkalin.dao.Dao;
+import ru.kpfu.itis.shkalin.dao.PostDao;
 import ru.kpfu.itis.shkalin.dto.PostFullDto;
 import ru.kpfu.itis.shkalin.entity.Post;
 import ru.kpfu.itis.shkalin.service.converter.ConverterService;
@@ -33,6 +34,13 @@ public class PostCrudService implements CrudService<PostFullDto>{
         } else{
             return null;
         }
+    }
+
+    public List<PostFullDto> getByUserId(int id) {
+        PostDao postDao = (PostDao) dao;
+        return postDao.getByUserId(id).stream()
+                .map(post -> (PostFullDto) converter.getUpdateDto(post, new PostFullDto()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -73,19 +81,31 @@ public class PostCrudService implements CrudService<PostFullDto>{
         int day = localDateTime.getDayOfMonth();
         int month = localDateTime.getMonthValue();
         int year = localDateTime.getYear();
-        if (hour < 10) {
-            sb.append("0").append(hour);
-        } else {
-            sb.append(hour);
-        }
-        sb.append(":");
-        if (minute < 10) {
-            sb.append("0").append(minute);
-        } else {
-            sb.append(minute);
-        }
+//        if (hour < 10) {
+//            sb.append("0").append(hour);
+//        } else {
+//            sb.append(hour);
+//        }
+//        sb.append(":");
+//        if (minute < 10) {
+//            sb.append("0").append(minute);
+//        } else {
+//            sb.append(minute);
+//        }
         sb.append("  ");
-        sb.append(day).append(".").append(month).append(".").append(year);
+        if (day < 10) {
+            sb.append("0").append(day);
+        } else {
+            sb.append(day);
+        }
+        sb.append(".");
+        if (month < 10) {
+            sb.append("0").append(month);
+        } else {
+            sb.append(month);
+        }
+        sb.append(".").append(year);
+
         return sb.toString();
     }
 }

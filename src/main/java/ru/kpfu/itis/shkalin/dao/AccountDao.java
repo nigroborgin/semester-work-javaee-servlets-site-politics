@@ -150,12 +150,13 @@ public class AccountDao implements Dao<Account> {
             }
             account.getRole().setId(role_id);
 
-            sql2 = generateUpdateQuery(account);
-            connection.createStatement().executeQuery(sql2);
+            sql1 = generateUpdateQuery(account);
+            connection.createStatement().executeQuery(sql1);
 
-        } catch (SQLException e) {
             LOGGER.warn("SQL1: " + sql1);
             LOGGER.warn("SQL2: " + sql2);
+        } catch (SQLException e) {
+
             LOGGER.warn("Failed execute update query", e);
         }
     }

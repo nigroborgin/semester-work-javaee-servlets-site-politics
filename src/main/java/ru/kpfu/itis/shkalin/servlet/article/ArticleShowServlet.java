@@ -2,6 +2,7 @@ package ru.kpfu.itis.shkalin.servlet.article;
 
 import ru.kpfu.itis.shkalin.dto.PostFullDto;
 import ru.kpfu.itis.shkalin.dto.PostViewDto;
+import ru.kpfu.itis.shkalin.service.converter.ConverterService;
 import ru.kpfu.itis.shkalin.service.converter.ConverterServiceImpl;
 import ru.kpfu.itis.shkalin.service.crud.PostCrudService;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class ArticleShowServlet extends HttpServlet {
         PostFullDto postFullDto;
         PostViewDto post = new PostViewDto();
         List<PostViewDto> postList = new ArrayList<>();
-        ConverterServiceImpl converter = new ConverterServiceImpl();
+        ConverterService converter = (ConverterServiceImpl) getServletContext().getAttribute("converter");
 
         if (id != null) {
             postFullDto = postCrudService.get(Integer.parseInt(id));
@@ -63,6 +65,16 @@ public class ArticleShowServlet extends HttpServlet {
             if (!postList.isEmpty()) {
                 req.setAttribute("postList", postList);
             }
+        }
+
+        if (req.getSession() != null && req.getSession().getAttribute("role") != null) {
+            if (req.getSession().getAttribute("role").toString().equals("admin")) {
+                req.setAttribute("showEditButtons", true);
+            } else {
+                req.setAttribute("showEditButtons", false);
+            }
+        } else {
+            req.setAttribute("showEditButtons", false);
         }
         req.getRequestDispatcher("/WEB-INF/view/articles.ftl").forward(req, resp);
     }

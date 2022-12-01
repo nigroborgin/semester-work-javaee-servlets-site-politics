@@ -58,9 +58,11 @@ public class ArticleSaveServlet extends HttpServlet {
         }
         req.setAttribute("type", type + "s");
 
+
         if (id != null) {
             post.setId(Integer.parseInt(req.getParameter("id")));
         }
+
         post.setUserId((Integer) req.getSession().getAttribute("id"));
         post.setTitle(req.getParameter("title"));
         post.setText(req.getParameter("text"));
@@ -77,9 +79,9 @@ public class ArticleSaveServlet extends HttpServlet {
         if (req.getRequestURI().contains("add")) {
             postCrudService.create(post);
         } else if (req.getRequestURI().contains("edit")) {
+//            postCrudService.get(id).getUserId().equals(req.getSession().getAttribute("id"))){
             postCrudService.update(post);
         }
-        req.setAttribute("message", "This " + type + " was edited!");
         resp.sendRedirect("/politics/" + type + "s/");
     }
 }

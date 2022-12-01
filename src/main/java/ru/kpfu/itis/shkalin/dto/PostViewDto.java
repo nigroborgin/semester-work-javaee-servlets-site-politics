@@ -2,6 +2,7 @@ package ru.kpfu.itis.shkalin.dto;
 
 public class PostViewDto extends AbstractDto{
     private Integer id;
+    private Integer userId;
     private String viewAuthor;
     private String title;
     private String text;
@@ -10,8 +11,9 @@ public class PostViewDto extends AbstractDto{
     public PostViewDto() {
     }
 
-    public PostViewDto(Integer id, String viewAuthor, String title, String text, String date) {
+    public PostViewDto(Integer id, Integer userId, String viewAuthor, String title, String text, String date) {
         this.id = id;
+        this.userId = userId;
         this.viewAuthor = viewAuthor;
         this.title = title;
         this.text = text;
@@ -24,6 +26,14 @@ public class PostViewDto extends AbstractDto{
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getViewAuthor() {

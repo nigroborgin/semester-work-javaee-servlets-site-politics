@@ -2,20 +2,20 @@
 <#macro title>Set Book info</#macro>
 
 <#macro content>
-    <h2>Set Book info</h2><br>
+    <h2>Set Book info</h2>
     <form method="post" enctype="multipart/form-data" >
         <label>Title:
-            <input type="text" name="title" <#if book??>value="${book.title}"</#if> />
+            <br><input type="text" name="title" <#if book??>value="${book.title}"</#if> />
         </label>
         <br>
 
         <label>Author:
-            <input type="text" name="author" <#if book??>value="${book.author}"</#if> />
+            <br><input type="text" name="author" <#if book??>value="${book.author}"</#if> />
         </label>
         <br>
 
         <label>Description:
-            <textarea name="description" id="" cols="30" rows="10"><#if book??>${book.description}</#if></textarea>
+            <br><textarea name="description" cols="30" rows="10"><#if book??>${book.description}</#if></textarea>
         </label>
         <br>
 
